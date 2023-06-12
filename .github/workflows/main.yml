@@ -1,6 +1,7 @@
 name: CI devops 2023
+
 on:
-  #to begin you want to launch this job in main and develop
+  # to begin you want to launch this job in main and develop
   push:
     branches: 
       - main
@@ -11,52 +12,55 @@ jobs:
   test-backend: 
     runs-on: ubuntu-22.04
     steps:
-     #checkout your github code using actions/checkout@v2.5.0
+      # checkout your GitHub code using actions/checkout@v2.5.0
       - uses: actions/checkout@v2.5.0
 
-     #do the same with another action (actions/setup-java@v3) that enable to setup jdk 17
+      # do the same with another action (actions/setup-java@v3) that enables to setup JDK 17
       - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
           java-version: 17
           distribution: adopt
 
-     #finally build your app with the latest command
+      # finally build your app with the latest command
       - name: Build and test with Maven
         run: mvn clean verify --file TP1/java/simple-api-student-main/pom.xml
 
         
-# define job to build and publish docker image
-build-and-push-docker-image:
- needs: test-backend
- # run only when code is compiling and tests are passing
- runs-on: ubuntu-22.04
+  # define job to build and publish Docker image
+  build-and-push-docker-image:
+    needs: test-backend
+    # run only when code is compiling and tests are passing
+    runs-on: ubuntu-22.04
 
- # steps to perform in job
- steps:
-   - name: Checkout code
-     uses: actions/checkout@v2.5.0
+    # steps to perform in job
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2.5.0
 
-   - name: Build image and push backend
-     uses: docker/build-push-action@v3
-     with:
-       # relative path to the place where source code with Dockerfile is located
-       context: ./TP1/java/simple-api-student-main
-       # Note: tags has to be all lower-case
-       tags:  ${{secrets.DOCKERHUB_LOGIN}}/tp-devops/simple-api
-   - name: Build image and push database
-       # DO the same for database
-       uses: docker/build-push-action@v3
-     with:
-       # relative path to the place where source code with Dockerfile is located
-       context: ./TP1/bdd
-       # Note: tags has to be all lower-case
-       tags:  ${{secrets.DOCKERHUB_LOGIN}}/tp-devops/simple-bdd
-   - name: Build image and push httpd
-     # DO the same for httpd
-     uses: docker/build-push-action@v3
-     with:
-       # relative path to the place where source code with Dockerfile is located
-       context: ./TP1/http_server
-       # Note: tags has to be all lower-case
-       tags:  ${{secrets.DOCKERHUB_LOGIN}}/tp-devops/simple-http-server
+      - name: Build image and push backend
+        uses: docker/build-push-action@v3
+        with:
+          # relative path to the place where source code with Dockerfile is located
+          context: ./TP1/java/simple-api-student-main
+          # Note: tags has to be all lower-case
+          tags: ${{secrets.DOCKERHUB_LOGIN}}/tp-devops/simple-api
+      
+      - name: Build image and push database
+        # Do the same for the database
+        uses: docker/build-push-action@v3
+        with:
+          # relative path to the place where source code with Dockerfile is located
+          context: ./TP1/bdd
+          # Note: tags has to be all lower-case
+          tags: ${{secrets.DOCKERHUB_LOGIN}}/tp-devops/simple-bdd
+      
+      - name: Build image and push httpd
+        # Do the same for httpd
+        uses: docker/build-push-action@v3
+        with:
+          # relative path to the place where source code with Dockerfile is located
+          context: ./TP1/http_server
+          # Note: tags has to be all lower-case
+          tags: ${{secrets.DOCKERHUB_LOGIN}}/tp-devops/simple-http-server
+
