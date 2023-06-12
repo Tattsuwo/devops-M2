@@ -44,7 +44,6 @@ build-and-push-docker-image:
        context: ./TP1/java/simple-api-student-main
        # Note: tags has to be all lower-case
        tags:  ${{secrets.DOCKERHUB_LOGIN}}/tp-devops/simple-api
-
    - name: Build image and push database
        # DO the same for database
        uses: docker/build-push-action@v3
@@ -53,7 +52,6 @@ build-and-push-docker-image:
        context: ./TP1/bdd
        # Note: tags has to be all lower-case
        tags:  ${{secrets.DOCKERHUB_LOGIN}}/tp-devops/simple-bdd
-
    - name: Build image and push httpd
      # DO the same for httpd
      uses: docker/build-push-action@v3
