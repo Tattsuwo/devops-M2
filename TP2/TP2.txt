@@ -18,3 +18,6 @@ push: ${{ github.ref == 'refs/heads/main' }}
 
 
 bien mettre les bonnes clés dans le main.yaml
+
+NE PAS OUBLIER DE CREER LE BON REPERTOIRE AVEC LE BON TAG ET AJOUTER ":" A LA FIN POUR FAIRE COMPRENDRE A CE CON QUE CEST LE FICHIER ATTENDU
+exemple : tags: ${{secrets.DOCKERHUB_LOGIN}}/tp-devops:simple-bdd
