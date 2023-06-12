@@ -25,6 +25,9 @@ jobs:
       # finally build your app with the latest command
       - name: Build and test with Maven
         run: mvn clean verify --file TP1/java/simple-api-student-main/pom.xml
+  
+      - name: Login to DockerHub
+        run: docker login -u ${{ secrets.DOCKERHUB_LOGIN }} -p ${{ secrets.DOCKERHUB_PASSWORD }}
 
         
   # define job to build and publish Docker image
@@ -45,6 +48,8 @@ jobs:
           context: ./TP1/java/simple-api-student-main
           # Note: tags has to be all lower-case
           tags: ${{secrets.DOCKERHUB_LOGIN}}/tp-devops/simple-api
+          # build on feature branches, push only on main branch
+          push: ${{ github.ref == 'refs/heads/main' }}
       
       - name: Build image and push database
         # Do the same for the database
@@ -54,6 +59,8 @@ jobs:
           context: ./TP1/bdd
           # Note: tags has to be all lower-case
           tags: ${{secrets.DOCKERHUB_LOGIN}}/tp-devops/simple-bdd
+          # build on feature branches, push only on main branch
+          push: ${{ github.ref == 'refs/heads/main' }}
       
       - name: Build image and push httpd
         # Do the same for httpd
@@ -63,4 +70,6 @@ jobs:
           context: ./TP1/http_server
           # Note: tags has to be all lower-case
           tags: ${{secrets.DOCKERHUB_LOGIN}}/tp-devops/simple-http-server
+          # build on feature branches, push only on main branch
+          push: ${{ github.ref == 'refs/heads/main' }}
 
