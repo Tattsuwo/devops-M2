@@ -1,3 +1,4 @@
 mettre tous les workflows pour les pipelines dans le dossier .github/workflows
 
-
+dans le main.yaml, il faut bien définir tous les uses et mettre la commande avec le chemin 
+-> run: mvn clean verify --file TP1/java/simple-api-student-main/pom.xml
