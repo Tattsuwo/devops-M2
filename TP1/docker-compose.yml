@@ -1,0 +1,29 @@
+version: '3.7'
+
+services:
+    backend:
+        build: ./java/simple-api-student-main    # Chemin vers le répertoire contenant le Dockerfile pour le backend
+        networks:
+            - my-network
+        depends_on:
+            - database
+
+    database:
+        build: ./bdd    # Chemin vers le répertoire contenant le Dockerfile pour la base de données
+        volumes: 
+            - /my/own/datadir:/var/lib/postgresql/data
+        networks:
+            - my-network
+
+    httpd:
+        build: ./http_server    # Chemin vers le répertoire contenant le Dockerfile pour le serveur HTML
+        ports:
+            - 8080:80    # Port de redirection du serveur Apache
+        networks:
+            - my-network
+        depends_on:
+            - backend
+
+networks:
+    my-network:
+

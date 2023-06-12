@@ -1,0 +1,35 @@
+Dev vs DevOps
+
+
+site TD et TP : http://school.pages.takima.io/devops-resources/
+
+
+DevsOps -> une approche qui livre en continue rapidement, il faut que sa fonctionne
+
+3 grands principes : continious improvements, feedback, experiment
+
+
+provisionner un serveur -> mettre en place le serveur (installation docker, verification version java ...)
+
+-------
+DOCKER
+
+modele VM -> lent et lourd à cause de l'OS
+
+1 process = 1 container
+
+configuration à l'extérieur du container pour pouvoir le changer rapidement(utilisation de Volumes)
+
+
+commande pour lancer un container : docker run -p 3306:3306 mysql
+port local:port container et mysql ici c'est l'image du docker
+
+
+Dokerfile -> Docker image -> Docker container
+
+
+astuce : utilisez des images officielles, la plus petite taille d'image possible, et fixer les versions
+
+
+
+Docker compose : configuration pour décrire un ensemble de container

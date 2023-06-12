@@ -1,0 +1,76 @@
+récupérer une image :
+docker pull ubuntu:12.04
+sans la specification, il prendra la derniere version
+
+lancer le docker : 
+docker run alpine ls -l
+
+voir les images presents sur la machine :
+docker images
+
+mode interactif :
+docker run -it alpine /bin/sh
+
+
+cherche et installe l'image :
+docker run -d dockersamples/static-site
+
+
+voir les container en cours d'execution :
+docker ps
+docker ps -a
+
+docker stop a7a0e504ca3e
+docker rm   a7a0e504ca3e
+pour faire les 2 en meme temps : docker rm -f static-site-2
+
+
+déploiement de image :
+docker run --name static-site-2 -e AUTHOR="Your Name" -d -p 8888:80 dockersamples/static-site
+
+voir les ports utilisés :
+docker port static-site
+
+http://localhost:[YOUR_PORT_FOR 80/tcp]
+http://localhost:49154
+
+
+
+
+Chercher les dockers disponibles sur le store :
+docker search
+
+---------------------------------------------
+Dockerfile :
+
+# our base image
+FROM alpine:3.6
+
+# Install python and pip
+RUN apk add --update py2-pip
+
+# install Python modules needed by the Python app
+COPY requirements.txt /usr/src/app/
+RUN pip install --no-cache-dir -r /usr/src/app/requirements.txt
+
+# copy files required for the app to run
+COPY app.py /usr/src/app/
+COPY templates/index.html /usr/src/app/templates/
+
+# tell the port number the container should expose
+EXPOSE 5000
+
+# run the application
+CMD ["python", "/usr/src/app/app.py"]
+
+
+
+
+
+--------------------------------
+Création d'une image basée sur les répertoires :
+docker build -t <YOUR_USERNAME>/myfirstapp .
+
+
+tester la version créer :
+docker run -p 8888:5000 --name myfirstapp tatsuwo/myfirstapp
