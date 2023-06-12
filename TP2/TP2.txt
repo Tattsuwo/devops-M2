@@ -15,3 +15,6 @@ mettre la connection dockerhub avant le build :
 mettre le push pour l'envoyer sur dockerhub :
 # build on feature branches, push only on main branch
 push: ${{ github.ref == 'refs/heads/main' }}
+
+
+bien mettre les bonnes clés dans le main.yaml
