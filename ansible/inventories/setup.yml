@@ -1,8 +1,8 @@
 all:
  vars:
-   ansible_user: centos
-   ansible_ssh_private_key_file: ~/.ssh/id_rsa
-   ansible_python_interpreter: /bin/python3
+   ansible_user: centos #variable spéciale d'Ansible qui permet de spécifier le nom d'utilisateur à utiliser lors de la connexion aux hôtes cibles.
+   ansible_ssh_private_key_file: ~/.ssh/id_rsa #ssh permettant d'acceder à l'host
+   ansible_python_interpreter: /bin/python3 #interpreter qui prévient l'utilisation de python3
  children:
    prod:
-     hosts: chhoathierry.takima.cloud
+     hosts: chhoathierry.takima.cloud 

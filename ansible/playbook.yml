@@ -1,17 +1,21 @@
-- hosts: all
-  gather_facts: false
-  become: yes
-  roles:
-    - role: docker
+- hosts: all  # Les tâches seront exécutées sur tous les hôtes définis dans l'inventaire
+  gather_facts: false  # Ne pas collecter automatiquement les faits sur les hôtes
+  become: yes  # Devenir superutilisateur (root) pour exécuter les tâches
+
+  roles:  # Liste des rôles à exécuter
+    - role: docker  # Exécuter le rôle "docker"
       vars:
-        ansible_python_interpreter: /usr/bin/python
-    - role: create-network
+        ansible_python_interpreter: /usr/bin/python  # Définir l'interpréteur Python utilisé pour ce rôle
+
+    - role: create-network  # Exécuter le rôle "create-network"
       vars:
-        ansible_python_interpreter: /usr/bin/python3
-    - role: launch-database
+        ansible_python_interpreter: /usr/bin/python3  # Définir l'interpréteur Python utilisé pour ce rôle
+
+    - role: launch-database  # Exécuter le rôle "launch-database"
       vars:
-        ansible_python_interpreter: /usr/bin/python3
-    - role: launch-app
+        ansible_python_interpreter: /usr/bin/python3  # Définir l'interpréteur Python utilisé pour ce rôle
+
+    - role: launch-app  # Exécuter le rôle "launch-app"
       vars:
-        ansible_python_interpreter: /usr/bin/python3
+        ansible_python_interpreter: /usr/bin/python3  # Définir l'interpréteur Python utilisé pour ce rôle
 

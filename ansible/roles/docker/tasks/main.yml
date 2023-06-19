@@ -1,39 +1,39 @@
 - name: Clean packages
   command:
-    cmd: yum clean -y packages
+    cmd: yum clean -y packages  # Nettoyer les packages avec yum clean
 
 - name: Install device-mapper-persistent-data
   yum:
-    name: device-mapper-persistent-data
-    state: latest
+    name: device-mapper-persistent-data  # Installer le package device-mapper-persistent-data
+    state: latest  # S'assurer que la dernière version est installée
 
 - name: Install lvm2
   yum:
-    name: lvm2
-    state: latest
+    name: lvm2  # Installer le package lvm2
+    state: latest  # S'assurer que la dernière version est installée
 
 - name: Add Docker repository
   command:
-    cmd: sudo yum-config-manager --add-repo=https://download.docker.com/linux/centos/docker-ce.repo
+    cmd: sudo yum-config-manager --add-repo=https://download.docker.com/linux/centos/docker-ce.repo  # Ajouter le dépôt Docker
 
 - name: Install Docker
   yum:
-    name: docker-ce
-    state: present
+    name: docker-ce  # Installer Docker Community Edition
+    state: present  # S'assurer que le package est présent
 
 - name: Install python3
   yum:
-    name: python3
-    state: present
-  
+    name: python3  # Installer Python 3
+    state: present  # S'assurer que le package est présent
+
 - name: Pip install
   pip:
-    name: docker
-    executable: pip3
+    name: docker  # Installer le module docker via pip
+    executable: pip3  # Utiliser le binaire pip3 pour l'installation
 
 - name: Make sure Docker is running
   service:
-    name: docker
-    state: started
-  tags: docker
+    name: docker  # S'assurer que le service Docker est en cours d'exécution
+    state: started  # Démarrer le service si ce n'est pas déjà le cas
+  tags: docker  # Ajouter le tag "docker" pour l'exécution sélective des tâches
 

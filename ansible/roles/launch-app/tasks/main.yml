@@ -4,6 +4,6 @@
 - name: Launch app container
   docker_container:
     name: app
-    image: tatsuwo/tp-devops:simple-http-server
+    image: tatsuwo/tp-devops:simple-http-server # Image Docker à utiliser pour le conteneur
     networks:
       - name: app-network

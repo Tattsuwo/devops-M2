@@ -1,3 +1,7 @@
+# TP3
+
+## 3-1 Document your inventory and base commands
+
 Se connecter au serveur distant pour utiliser son terminal :
 ssh -i ~/.ssh/id_rsa centos@chhoathierry.takima.cloud
 
@@ -10,7 +14,7 @@ envoyer ping au serveur distant :
 ansible all -m ping --private-key=~/.ssh/id_rsa -u centos
 
 
-mettre Apace sur le serveur distant :
+mettre Apache sur le serveur distant :
 ansible all -m yum -a "name=httpd state=present" --private-key=~/.ssh/id_rsa -u centos --become
 
 
@@ -24,7 +28,6 @@ ansible all -m service -a "name=httpd state=started" --private-key=~/.ssh/id_rsa
 aller sur le site web pour constater l'installation : 
 chhoathierry.takima.cloud
 
------------------------------------------------------------------------------------------
 
 ansible all -i ansible/inventories/setup.yml -m ping
 
@@ -45,11 +48,23 @@ ansible-playbook -i ansible/inventories/setup.yml ansible/playbook.yml
 remplacer dnf par yum car on a installé dans le playbook.yml
 
 
-----------------------------
+## 3-2 Document your playbook and Document your docker_container tasks configuration.
 
 création des differents roles : 
 ansible-galaxy init roles/launch-proxy
+ansible-galaxy init roles/docker
+ansible-galaxy init roles/launch-app
+ansible-galaxy init roles/create-network
+ansible-galaxy init roles/launch-database
 
-modidier le task pour chacun des roles
+On modifie le task pour chacun des roles pour permettre au playbook d'etre plus propre et lisible.
 
-et creer un playbook qui initialise tout les roles .
+Vous pouvez aller voir les commentaires de chaque task des 5 roles.
+
+après on crée un playbook qui initialise tout les roles.
+
+Dans mon cas, j'ai créé chaque role avec un interpreter specifiant la version du python car ansible n'a pas reconnu python l'hors de mes tests.
+J'ai perdu toute l'après midi à régler ce problème, je n'ai donc pas réussi à mettre le backend sur ansible. Tant pis, skill issue.
+
+
+
