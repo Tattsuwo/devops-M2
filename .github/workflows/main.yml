@@ -24,6 +24,7 @@ jobs:
 
       # finally build your app with the latest command
       - name: Build and test with Maven
+        # run the maven with the extention sonarcloud
         run: mvn -B verify sonar:sonar -Dsonar.projectKey=Tattsuwo_devops-M2 -Dsonar.organization=tattsuwo -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${{ secrets.SONAR_TOKEN }}  --file ./TP1/java/simple-api-student-main/pom.xml
 
         
@@ -39,6 +40,7 @@ jobs:
         uses: actions/checkout@v2.5.0
 
       - name: Login to DockerHub
+        # connect the docker hub account
         run: docker login -u ${{ secrets.DOCKERHUB_LOGIN }} -p ${{ secrets.DOCKERHUB_PASSWORD }}
         
       - name: Build image and push backend
