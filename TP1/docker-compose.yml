@@ -4,14 +4,14 @@ services:
     backend:
         build: ./java/simple-api-student-main    # Chemin vers le répertoire contenant le Dockerfile pour le backend
         networks:
-            - my-network
+            - my-network #zone network pour le test avec les autres services qui on le même nom
         depends_on:
-            - database
+            - database #dépend du service basebase
 
     database:
         build: ./bdd    # Chemin vers le répertoire contenant le Dockerfile pour la base de données
         volumes: 
-            - /my/own/datadir:/var/lib/postgresql/data
+            - /my/own/datadir:/var/lib/postgresql/data # permet de partager et de persister les données de la base de données PostgreSQL entre les redémarrages du conteneur
         networks:
             - my-network
 
@@ -22,7 +22,7 @@ services:
         networks:
             - my-network
         depends_on:
-            - backend
+            - backend # dépend du service backend
 
 networks:
     my-network:
