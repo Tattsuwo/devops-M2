@@ -1,0 +1,9 @@
+---
+# tasks file for roles/launch-app
+
+- name: Launch app container
+  docker_container:
+    name: app
+    image: tatsuwo/tp-devops:simple-http-server
+    networks:
+      - name: app-network

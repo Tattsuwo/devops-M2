@@ -1,0 +1,9 @@
+---
+# tasks file for roles/launch-database
+- name: Launch database container
+  docker_container:
+    name: database
+    image: tatsuwo/tp-devops:simple-bdd
+    networks:
+      - name: app-network
+

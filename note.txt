@@ -8,7 +8,6 @@ DevsOps -> une approche qui livre en continue rapidement, il faut que sa fonctio
 
 3 grands principes : continious improvements, feedback, experiment
 
-
 provisionner un serveur -> mettre en place le serveur (installation docker, verification version java ...)
 
 -------
@@ -29,7 +28,6 @@ Dokerfile -> Docker image -> Docker container
 
 
 astuce : utilisez des images officielles, la plus petite taille d'image possible, et fixer les versions
-
 
 
 Docker compose : configuration pour décrire un ensemble de container

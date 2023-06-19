@@ -1,0 +1,17 @@
+- hosts: all
+  gather_facts: false
+  become: yes
+  roles:
+    - role: docker
+      vars:
+        ansible_python_interpreter: /usr/bin/python
+    - role: create-network
+      vars:
+        ansible_python_interpreter: /usr/bin/python3
+    - role: launch-database
+      vars:
+        ansible_python_interpreter: /usr/bin/python3
+    - role: launch-app
+      vars:
+        ansible_python_interpreter: /usr/bin/python3
+

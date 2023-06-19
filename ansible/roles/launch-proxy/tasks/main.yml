@@ -1,0 +1,9 @@
+---
+# tasks file for roles/launch-proxy
+
+- name: Launch proxy container
+  docker_container:
+    name: proxy
+    image: 
+    networks:
+      - name: app-network
